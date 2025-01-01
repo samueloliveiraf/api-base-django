@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import LoginRecord, LoginAttempt
 
-# Register your models here.
+
+admin.site.register(LoginRecord)
+admin.site.register(LoginAttempt)

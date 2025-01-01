@@ -30,6 +30,7 @@ DEFAULT_APPS = [
 ]
 
 THIRD_APPS = [
+    'rest_framework_simplejwt.token_blacklist',
     'rest_framework_simplejwt',
     'rest_framework',
     'corsheaders',
@@ -78,12 +79,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-        'default': dj_database_url.parse(
-            Environments.DB_POSTGRES,
-            conn_max_age=600,
-            ssl_require=False
-        )
-    }
+    'default': dj_database_url.parse(
+        Environments.DB_POSTGRES,
+        conn_max_age=600,
+        ssl_require=False
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -112,6 +113,13 @@ REST_FRAMEWORK = {
     ),
 }
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=4),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ROTATE_REFRESH_TOKENS': True
+}
+
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
         'JWT': {
@@ -127,14 +135,6 @@ SWAGGER_SETTINGS = {
     ],
 }
 
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False
-}
-
 CORS_ALLOW_METHODS = (
     'DELETE',
     'GET',
@@ -146,12 +146,26 @@ CORS_ALLOW_METHODS = (
 
 CORS_ALLOWED_ORIGINS = Environments.CORS_ALLOWED_ORIGINS
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+# EMAIL_BACKEND =
+# EMAIL_HOST =
+# EMAIL_PORT =
+# EMAIL_USE_TLS =
+# EMAIL_HOST_USER =
+# EMAIL_HOST_PASSWORD =
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 TIME_ZONE = 'America/Sao_Paulo'
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 USE_I18N = True
 
