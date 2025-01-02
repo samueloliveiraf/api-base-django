@@ -18,7 +18,7 @@ class Product(BaseModel):
         return self.name
 
     class Meta:
-        verbose_name = 'Produto'
-        verbose_name_plural = 'Produtos'
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
         ordering = ['-created_at']
         db_table = 'products'
