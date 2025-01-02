@@ -1,4 +1,5 @@
 from datetime import timedelta
+import os
 
 from environments.conf import Environments
 from pathlib import Path
@@ -160,6 +161,14 @@ EMAIL_HOST_PASSWORD = Environments.EMAIL_HOST_PASSWORD
 EMAIL_HOST_USER = Environments.EMAIL_HOST_USER
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+STATIC_ROOT = 'staticfiles'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
